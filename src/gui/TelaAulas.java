@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,6 +23,8 @@ import classes.Aulas;
 import classes.Curso;
 import classes.Professor;
 import classes.Sala;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class TelaAulas extends JFrame {
 
@@ -55,6 +60,7 @@ public class TelaAulas extends JFrame {
 	private Sala sala;
 	private Professor professor;
 	private Aulas aulas;
+	private List<Aluno> listaAluno;
 
 	/**
 	 * Launch the application.
@@ -76,6 +82,7 @@ public class TelaAulas extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaAulas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\giuseppe.cstrapaicci\\Downloads\\Etherbrian-System-Error-Systemer.32.png"));
 		
 		/*
 		 * Vamos instanciar as nossas classes para gerar
@@ -85,7 +92,7 @@ public class TelaAulas extends JFrame {
 		 */
 		
 		curso = new Curso();
-		aluno = new Aluno();
+		listaAluno = new ArrayList<Aluno>();
 		sala = new Sala();
 		professor = new Professor ();
 		aulas = new Aulas();
@@ -104,7 +111,7 @@ public class TelaAulas extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel_curso = new JPanel();
-		panel_curso.setBackground(Color.WHITE);
+		panel_curso.setBackground(Color.CYAN);
 		panel_curso.setBounds(10, 11, 805, 90);
 		contentPane.add(panel_curso);
 		panel_curso.setLayout(null);
@@ -158,7 +165,7 @@ public class TelaAulas extends JFrame {
 		panel_curso.add(txtPrecoCursos);
 		
 		JPanel panel_sala = new JPanel();
-		panel_sala.setBackground(new Color(255, 255, 255));
+		panel_sala.setBackground(Color.CYAN);
 		panel_sala.setBounds(10, 107, 805, 64);
 		contentPane.add(panel_sala);
 		panel_sala.setLayout(null);
@@ -192,7 +199,7 @@ public class TelaAulas extends JFrame {
 		panel_sala.add(txtDescricao);
 		
 		JPanel panel_professor = new JPanel();
-		panel_professor.setBackground(new Color(255, 255, 255));
+		panel_professor.setBackground(Color.CYAN);
 		panel_professor.setBounds(10, 179, 805, 76);
 		contentPane.add(panel_professor);
 		panel_professor.setLayout(null);
@@ -234,7 +241,7 @@ public class TelaAulas extends JFrame {
 		panel_professor.add(txtCPF);
 		
 		JPanel panel_aluno = new JPanel();
-		panel_aluno.setBackground(new Color(255, 255, 255));
+		panel_aluno.setBackground(Color.CYAN);
 		panel_aluno.setBounds(10, 266, 805, 116);
 		contentPane.add(panel_aluno);
 		panel_aluno.setLayout(null);
@@ -296,7 +303,7 @@ public class TelaAulas extends JFrame {
 		panel_aluno.add(txtIdade);
 		
 		JPanel panel_aulas = new JPanel();
-		panel_aulas.setBackground(new Color(255, 255, 255));
+		panel_aulas.setBackground(Color.CYAN);
 		panel_aulas.setBounds(10, 393, 805, 106);
 		contentPane.add(panel_aulas);
 		panel_aulas.setLayout(null);
@@ -357,6 +364,10 @@ public class TelaAulas extends JFrame {
 		panel_aulas.add(lblNewLabel_1_1_1_1);
 		
 		JComboBox CBO = new JComboBox();
+		CBO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		CBO.setBounds(533, 48, 262, 17);
 		panel_aulas.add(CBO);
 		
@@ -370,6 +381,7 @@ public class TelaAulas extends JFrame {
 		panel_aulas.add(txtsala);
 		
 		btnIncluirCurso = new JButton("Incluir curso");
+		btnIncluirCurso.setIcon(new ImageIcon("C:\\Users\\giuseppe.cstrapaicci\\Downloads\\Etherbrian-System-Error-Unlucky.32.png"));
 		btnIncluirCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/*
@@ -386,7 +398,7 @@ public class TelaAulas extends JFrame {
 				curso.setTitulo(txtTituloCurso.getText());
 				curso.setArea(txtArea.getText());
 				curso.setCargaHoraria(txtCargaHoraria.getText());
-				curso.setPreco(Double.parseDouble(txtPrecoCurso.getText()));
+				curso.setPreco(Double.parseDouble(txtPrecoCursos.getText()));
 				
 				
 				/*
@@ -400,23 +412,49 @@ public class TelaAulas extends JFrame {
 				btnIncluirCurso.setEnabled(false);
 				}
 		});
-		btnIncluirCurso.setBounds(10, 510, 141, 23);
+		btnIncluirCurso.setBounds(10, 510, 141, 60);
 		contentPane.add(btnIncluirCurso);
 		
 		JButton btnIncluirSala = new JButton("Incluir sala");
+		btnIncluirSala.setIcon(new ImageIcon("C:\\Users\\giuseppe.cstrapaicci\\Downloads\\Etherbrian-System-Error-Assimilated.32.png"));
 		btnIncluirSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				/*
+				 * Preencher os dados do objetos sala
+				 */
+				
+				sala.setIdentificacao(txtIdentificacao.getText());
+				sala.setDescricao(txtDescricao.getText());
+				
+				txtsala.setText(txtIdentificacao.getText());
+				
+				
+				
+				
 				btnIncluirSala.setEnabled(false);
 				txtIdentificacao.setEnabled(false);
 				txtDescricaos.setEnabled(false);
 			}
 		});
-		btnIncluirSala.setBounds(161, 510, 141, 23);
+		btnIncluirSala.setBounds(161, 510, 141, 60);
 		contentPane.add(btnIncluirSala);
 		
 		JButton btnIncluirProfessor = new JButton("Incluir professor");
+		btnIncluirProfessor.setIcon(new ImageIcon("C:\\Users\\giuseppe.cstrapaicci\\Downloads\\Iconfactory-Kidcons-Note.32.png"));
 		btnIncluirProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				professor.setNome(txtNomeProfessor.getText());
+				professor.setEmail(txtEmailProfessor.getText());
+				professor.setCpf(txtCpfProfessor.getText());
+				
+				txtProfessor.setText(txtNomeProfessor.getText());
+				
+				
+				
 				txtCurso.setText(txtNomeProfessor.getText());
 				btnIncluirProfessor.setEnabled(false);
 				txtNomeProfessor.setEnabled(false);
@@ -424,22 +462,49 @@ public class TelaAulas extends JFrame {
 				txtCpfProfessor.setEnabled(false);
 			}
 		});
-		btnIncluirProfessor.setBounds(312, 510, 141, 23);
+		btnIncluirProfessor.setBounds(312, 510, 141, 60);
 		contentPane.add(btnIncluirProfessor);
 		
 		JButton btnIncluirAluno = new JButton("Incluir aluno");
+		btnIncluirAluno.setIcon(new ImageIcon("C:\\Users\\giuseppe.cstrapaicci\\Downloads\\Umar123-Mantra-IMac-On.32.png"));
 		btnIncluirAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				aluno = new Aluno();
+				
+				aluno.setNome(txtNomeAluno.getText());
+				aluno.setEmail(txtEmailAluno.getText());
+				aluno.setCpf(txtCpfAluno.getText());
+				aluno.setIdade(Integer.parseInt(txtIdade.getText()));
+				
+				listaAluno.add(aluno);
+				
 				CBO.addItem(txtNomeAluno.getText());
 				
 			}
 		});
-		btnIncluirAluno.setBounds(463, 510, 141, 23);
+		btnIncluirAluno.setBounds(463, 510, 141, 60);
 		contentPane.add(btnIncluirAluno);
 		
 		JButton btnCriarAula = new JButton("Criar a Aula");
+		btnCriarAula.setIcon(new ImageIcon("C:\\Users\\giuseppe.cstrapaicci\\Downloads\\Etherbrian-System-Error-Black-ball.32.png"));
 		btnCriarAula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				aulas.setId(Integer.parseInt(txtIdAula.getText()));
+				aulas.setCurso(curso);
+				aulas.setProfessor(professor);
+				
+				aulas.setInicio(new Date(Long.parseLong(txtInicio.getText())));
+				aulas.setTermico(new Date(Long.parseLong(txtTermino.getText())));
+				
+				aulas.setAluno(listaAluno.toArray(new Aluno[0]));
+				aulas.setSala(sala);
+				
+				
+				
+				
+				
 				btnCriarAula.setEnabled(false);
 				txtIdAula.setEditable(false);
 				txtCurso.setEnabled(false);
@@ -449,9 +514,11 @@ public class TelaAulas extends JFrame {
 				txtsala.setEnabled(false);
 				CBO.setEnabled(false);
 				txtCurso.setText(txtIdAula.getText());
+				
+			
 			}
 		});
-		btnCriarAula.setBounds(625, 510, 141, 23);
+		btnCriarAula.setBounds(625, 510, 141, 60);
 		contentPane.add(btnCriarAula);
 	}
 }
